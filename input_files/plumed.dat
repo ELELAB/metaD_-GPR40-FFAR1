@@ -1,0 +1,27 @@
+# Used to rebuild molecules that can become split by the PBC. ENTITY is used to specify the molecule (for more entries use a ist of ENTITY keywords: ENTITY0, ETITY1...)
+
+
+#R258Cz: ATOMS=3849
+#E65Cd: ATOMS=991
+#Y240OH: ATOMS=3584
+#K62Nz: ATOMS=949
+#Y91C: ATOMS=1369
+
+
+# 3rd CV ?NOPBC
+dist: DISTANCE ATOMS=991,3849 NOPBC
+#dist: DISTANCE ATOMS=R258Cz,E65Cd NOPBC
+dist2: DISTANCE ATOMS=3584,949 NOPBC
+dist3: DISTANCE ATOMS=3849,1369 NOPBC
+#rmsd: REFERENCE=ref_6_pocket_cl1_test.pdb TYPE=OPTIMAL
+rmsd: RMSD REFERENCE=ref_6_pocket_cl1.pdb TYPE=OPTIMAL
+
+#ene: ENERGY (other possible CV)
+#The keyword PACE determines the stride of Gaussian deposition in number of time steps, 
+#while the keyword HEIGHT specifies the height of the Gaussian in kJoule/mol. 
+#For each CVs, one has to specified the width of the Gaussian by using the keyword SIGMA (same unit as CV). Gaussian will be written to the file indicated by the keyword FILE.
+
+wte: METAD ARG=dist,dist2,dist3,rmsd PACE=500 HEIGHT=0.5 SIGMA=0.35,0.35,0.35,0.35 FILE=HILLS BIASFACTOR=4 TEMP=310.15
+
+# Print all the values in the colvar_ptwte
+PRINT ARG=dist,dist2,dist3,rmsd STRIDE=500 FILE=COLVAR

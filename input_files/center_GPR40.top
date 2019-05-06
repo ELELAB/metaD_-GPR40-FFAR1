@@ -1,0 +1,48 @@
+;
+;	File 'topol.top' was generated
+;	By user: onbekend (0)
+;	On host: onbekend
+;	At date: Wed Nov 30 18:16:02 2011
+;
+;	This is a standalone topology file
+;
+;	It was generated using program:
+;	pdb2gmx - VERSION 4.5.5
+;
+;	Command line was:
+;	pdb2gmx -f pope-single.gro -ff charmm36 -water tip3p 
+;
+;	Force field was read from the standard Gromacs share directory.
+;
+
+; Include forcefield parameters
+#include "charmm36.ff/forcefield.itp"
+
+; Include chain topologies
+#include "GPR40_chainA.itp" ; change for your system
+#include "POPE.itp"
+
+; Include topology for ions and water
+#include "charmm36.ff/ions.itp"
+#include "charmm36.ff/tips3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+
+[ system ]
+; Name
+GRowing Old MAkes el Chrono Sweat in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+SOL                58
+pope              244
+SOL              19409
+NA               83
+CL               92
